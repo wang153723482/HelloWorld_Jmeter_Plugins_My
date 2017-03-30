@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--<PatternLayout pattern="[%-4p]%d %l%m"/>-->
+            <PatternLayout pattern="%d-%m"/><!--做性能测试，应该用尽量简单的模板-->
+        </Console>
+
+        <File name="file_log" fileName="Z:/logs/log4j2.log">
+            <PatternLayout pattern="[%-4p]%d %l%m"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO"><!-- 这里相当于1.*里的rootLogger 的第一个参数，下面的子元素是指定的appender -->
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="file_log"/>
+        </Root>
+    </Loggers>
+</Configuration>

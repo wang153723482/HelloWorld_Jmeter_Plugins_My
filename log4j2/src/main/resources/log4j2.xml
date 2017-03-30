@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5p] %d %c - %m%n"/>
+        </Console>
+
+        <File name="file_log" fileName="Z:/logs/log3.log">
+            <PatternLayout pattern="[%-5p] %d %c - %m%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO"><!-- 这里相当于1.*里的rootLogger 的第一个参数，下面的子元素是指定的appender -->
+            <!--<AppenderRef ref="Console"/>-->
+            <AppenderRef ref="file_log"/>
+        </Root>
+    </Loggers>
+</Configuration>
