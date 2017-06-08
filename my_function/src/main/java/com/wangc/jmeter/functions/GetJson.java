@@ -5,8 +5,6 @@ import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -18,10 +16,8 @@ import java.util.List;
  */
 public class GetJson extends AbstractFunction {
 
-    private static final Logger logger = LoggerFactory.getLogger(GetJson.class);
     private static final List<String> desc = new LinkedList<String>();
-    private static final String KEY = "__getJson";
-    private Object[] values = null;
+    private static final String KEY = "__getJson";//函数名字
 
     static {
         desc.add("The key of json");
@@ -35,20 +31,17 @@ public class GetJson extends AbstractFunction {
 
     /*调用函数需要返回的东西*/
     public String execute(SampleResult sampleResult, Sampler sampler) throws InvalidVariableException {
-        String jsonString = new StringBuilder("{\"")
-                .append(keyJson.execute().trim())
-                .append("\":\"")
-                .append(valueJson.execute().trim())
-                .append("\"}")
-                .toString();
-
-        return jsonString;
+        return "{\""
+                + keyJson.execute().trim()
+                + "\":\""
+                + valueJson.execute().trim()
+                + "\"}";
     }
 
     /*参数校验，参数为所有参数元素的集合*/
     public void setParameters(Collection<CompoundVariable> collection) throws InvalidVariableException {
         checkParameterCount(collection, 2);//校验参数的个数
-        values = collection.toArray();
+        Object[] values = collection.toArray();
         keyJson = (CompoundVariable) values[0];
         valueJson = (CompoundVariable) values[1];
     }
